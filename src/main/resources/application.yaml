@@ -4,3 +4,31 @@ server:
 spring:
   application:
     name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          # Repositorio Git remoto
+          uri: https://github.com/ebuleje-dev/nttd-banking-config-repo
+          # Rama por defecto
+          default-label: main
+          # Buscar configuraciones en sub carpetas por nombre de aplicación
+          search-paths: '{application}'
+          # Clonar repositorio al iniciar
+          clone-on-start: true
+          # Timeout para operaciones Git (segundos)
+          timeout: 10
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.config: DEBUG
